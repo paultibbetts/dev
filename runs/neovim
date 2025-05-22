@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+# pre-requisites
+
+xcode-select --install
+
+brew install ninja cmake gettext curl
+
+# clone
+
+mkdir -p $HOME/git
+
+git clone -b v0.11.1 https://github.com/neovim/neovim $HOME/git/neovim
+
+# build
+
+cd $HOME/git/neovim
+
+git checkout stable
+
+make CMAKE_BUILD_TYPE=RelWithDebInfo
+
+sudo make install
+
+# path
+
+sudo mv ./build/bin/nvim /usr/local/bin/nvim
