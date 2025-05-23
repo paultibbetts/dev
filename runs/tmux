@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+brew install tmux -q
+
+DIR=~/.tmux/plugins/tpm
+
+[ -d "$DIR" ] || git clone https://github.com/tmux-plugins/tpm "$DIR"
+
