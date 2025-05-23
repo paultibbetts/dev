@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+tmux new-window -d -n zsh -c "$PWD" "/bin/zsh"
+
+tmux rename-window "nvim"
+nvim .
