@@ -41,6 +41,11 @@ copy_dir() {
 		execute rm -rf $to/$dir
 		execute cp -r $dir $to/$dir
 	done
+	files=$(find . -maxdepth 1 -mindepth 1 -type f)
+	for file in $files; do
+		execute rm $to/$file
+		execute cp $file $to/$file
+	done
 	popd > /dev/null
 }
 
@@ -53,4 +58,11 @@ copy_file() {
 	execute cp $from $to/$name
 }
 
+# config
+log "config"
 copy_dir .config $HOME/.config
+
+# zsh
+log "zsh"
+copy_file .zshrc $HOME
+copy_dir .zsh $HOME/.zsh
