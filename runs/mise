@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+brew install \
+  autoconf \
+  automake \
+  bison \
+  freetype \
+  gd \
+  gettext \
+  icu4c \
+  krb5 \
+  libedit \
+  libiconv \
+  libjpeg \
+  libpng \
+  libxml2 \
+  libzip \
+  pkg-config \
+  re2c \
+  zlib
+
+curl https://mise.run | sh
+
+export MISE_DIR="$HOME/.mise"
+export PATH="$MISE_DIR/bin:$MISE_DIR/shims:$PATH"
+eval "$("$MISE_DIR/bin/mise" activate bash)"
+
+mise plugin add php
+
+export PHP_CONFIGURE_OPTIONS="--with-openssl=$(brew --prefix openssl@3) --with-iconv=$(brew --prefix libiconv)"
+mise install
