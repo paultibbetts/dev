@@ -62,6 +62,10 @@ copy_file() {
 log "config"
 copy_dir .config $HOME/.config
 
+# local
+log "local"
+copy_dir .local $HOME/.local
+
 # zsh
 log "zsh"
 copy_file .zshrc $HOME
