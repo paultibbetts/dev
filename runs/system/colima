@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+
+while [[ $# > 0 ]]; do
+	if [[ $1 == "--dry" ]]; then
+		dry="1"
+	elif [[ $1 == "--bootstrap" ]]; then
+		bootstrap="1"
+	else
+		filter="$1"
+	fi
+	shift
+done
+
+log() {
+	if [[ $dry == "1" ]]; then
+		echo "[DRY_RUN]: $@"
+	else
+		echo "$@"
+	fi
+}
+
+execute() {
+	log "execute $@"
+	if [[ $dry == "1" ]]; then
+		return
+	fi
+
+	"$@"
+}
+
+script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+execute "$script_dir/docker"
+
+brew install colima 
+colima nerdctl install

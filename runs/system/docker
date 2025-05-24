@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+brew install docker docker-compose
+
+DOCKER_CONFIG="${HOME}/.docker/config.json"
+PLUGIN_DIR="${HOMEBREW_PREFIX:-$(brew --prefix)}/lib/docker/cli-plugins"
+
+mkdir -p "$(dirname "$DOCKER_CONFIG")"
+
+if [[ ! -f "$DOCKER_CONFIG" ]]; then
+  echo '{}' > "$DOCKER_CONFIG"
+fi
+
+tmpfile=$(mktemp)
+jq --arg dir "$PLUGIN_DIR" '
+  .cliPluginsExtraDirs = (
+    (.cliPluginsExtraDirs // []) + [$dir]
+    | unique
+  )
+' "$DOCKER_CONFIG" > "$tmpfile" && mv "$tmpfile" "$DOCKER_CONFIG"
+
