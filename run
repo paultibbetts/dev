@@ -37,8 +37,12 @@ log "$script_dir -- $filter"
 
 cd $script_dir
 
-if [[ $bootstrap == "1" ]]; then
-	./runs/bootstrap/run ${dry:+--dry}
+if [[ $bootstrap == "1" || $filter == "bootstrap" ]]; then
+	execute ./runs/bootstrap/run ${dry:+--dry}
+fi
+
+if [[ $filter == "bootstrap" ]]; then
+	exit 0;
 fi
 
 scripts=$(find ./runs/system ./runs/apps -mindepth 1 -maxdepth 1 -type f -perm +111)
