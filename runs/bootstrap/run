@@ -1,15 +1,12 @@
 #!/usr/bin/env bash
 
 script_dir=$(cd $(dirname "${BASH_SOURCE[0]}") && pwd)
-fulter=""
+filter=""
 dry=""
-bootstrap=""
 
 while [[ $# > 0 ]]; do
 	if [[ $1 == "--dry" ]]; then
 		dry="1"
-	elif [[ $1 == "--bootstrap" ]]; then
-		bootstrap="1"
 	else
 		filter="$1"
 	fi
@@ -33,15 +30,13 @@ execute() {
 	"$@"
 }
 
-log "$script_dir -- $filter"
+log "bootstrapping..."
 
 cd $script_dir
 
-if [[ $bootstrap == "1" ]]; then
-	./runs/bootstrap/run ${dry:+--dry}
-fi
+execute ./homebrew
 
-scripts=$(find ./runs/system ./runs/apps -mindepth 1 -maxdepth 1 -type f -perm +111)
+scripts=$(find . -mindepth 1 -maxdepth 1 -type f -perm +111 ! -name "$(basename $0)" ! -name "homebrew")
 
 for script in $scripts; do
 	if echo "$script" | grep -qv "$filter"; then
@@ -51,3 +46,5 @@ for script in $scripts; do
 
 	execute ./$script
 done
+
+log "bootstrapped."
