@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+prev=$(git symbolic-ref --short HEAD)
+git checkout main
+git pull
+git branch -d "$prev"
