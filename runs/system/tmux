@@ -1,8 +1,14 @@
 #!/usr/bin/env bash
 
-brew install tmux -q
+brew install tmux
 
 DIR=~/.tmux/plugins/tpm
 
 [ -d "$DIR" ] || git clone https://github.com/tmux-plugins/tpm "$DIR"
+
+tmux new-session -d \
+    "tmux source-file ~/.config/tmux/tmux.conf; \
+    tmux send-keys 'C-b I' C-m; \
+    sleep 2; \
+    tmux send-keys 'exit' C-m"
 
