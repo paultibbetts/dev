@@ -2,8 +2,6 @@
 
 # pre-requisites
 
-xcode-select --install
-
 brew install ninja cmake gettext curl
 
 # clone
