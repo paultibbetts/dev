@@ -60,14 +60,14 @@ copy_file() {
 
 # config
 log "config"
-copy_dir .config $HOME/.config
+copy_dir config $HOME/.config
 
 # local
 log "local"
-copy_dir .local $HOME/.local
+copy_dir local $HOME/.local
 
 # zsh
 log "zsh"
 copy_file .zshrc $HOME
-copy_dir .zsh $HOME/.zsh
+copy_dir zsh $HOME/.zsh
 
