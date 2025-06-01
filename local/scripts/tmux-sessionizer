@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-selected=$(find ~/code -maxdepth 1 -mindepth 1 -type d | fzf --tmux --delimiter / --with-nth 5)
+selected=$(fd . --base-directory ~/code --exact-depth 1 --type d --strip-cwd-prefix | fzf --tmux)
 if [[ -z $selected ]]; then
 	exit 0
 fi
