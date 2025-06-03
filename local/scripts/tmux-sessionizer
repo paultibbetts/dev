@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-selected=$(fd . --base-directory ~/code --exact-depth 1 --type d --strip-cwd-prefix | fzf --tmux)
+selected=$(fd . --base-directory "$HOME/code" --exact-depth 1 --type d --strip-cwd-prefix | fzf --tmux)
+
 if [[ -z $selected ]]; then
 	exit 0
 fi
@@ -20,6 +21,6 @@ if tmux has-session -t=$selected_name 2> /dev/null; then
 	exit 0
 fi
 
-tmux new-session -ds $selected_name -c "~/code/$selected"
+tmux new-session -ds $selected_name -c "$HOME/code/$selected"
 tmux send-keys -t "$selected_name:1.0" "ready-tmux" C-m 
 switch_to
