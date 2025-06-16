@@ -33,3 +33,5 @@ execute "$script_dir/docker"
 
 brew install colima 
 colima nerdctl install
+
+brew install lima lima-additional-guestagents qemu
