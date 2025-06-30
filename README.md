@@ -4,13 +4,13 @@ My personal developer environment setup scripts.
 
 This is what works for me. I don't expect or encourage anyone else to use them.
 
-## Requirements
+## Requirements
 
 - macOS
 - bash
 - internet access
 
-## Install
+## Install
 
 I wrote these scripts _after_ I had setup my laptop, so I already had a few things installed.
 
@@ -25,11 +25,11 @@ mkdir -p ~/code && cd ~/code
 git clone https://github.com/paultibbetts/dev.git 
 ```
 
-## Usage
+## Usage
 
 There are two main commands for these scripts.
 
-### `./run`
+### `./run`
 
 The run command will run other run commands.
 
