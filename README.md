@@ -12,17 +12,8 @@ This is what works for me. I don't expect or encourage anyone else to use them.
 
 ## Install
 
-I wrote these scripts _after_ I had setup my laptop, so I already had a few things installed.
-
-Until I write an install script that works from scratch the process is: 
-
-- install [Homebrew](https://brew.sh)
-- install git with `brew install git` 
-- then git clone this repo:
-
-```sh
-mkdir -p ~/code && cd ~/code
-git clone https://github.com/paultibbetts/dev.git 
+```
+curl -fsSl https://raw.githubusercontent.com/paultibbetts/dev/refs/heads/main/install | bash
 ```
 
 ## Usage
