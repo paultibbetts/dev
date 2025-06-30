@@ -1,0 +1,57 @@
+#!/usr/bin/env bash
+
+set -e
+
+script_dir=$(cd $(dirname "${BASH_SOURCE[0]}") && pwd)
+
+while [[ $# > 0 ]]; do
+	if [[ $1 == "--dry" ]]; then
+		dry="1"
+	else
+		filter="$1"
+	fi
+	shift
+done
+
+log() {
+	if [[ $dry == "1" ]]; then
+		echo "[DRY_RUN]: $@"
+	else
+		echo "$@"
+	fi
+}
+
+execute() {
+	log "execute $@"
+	if [[ $dry == "1" ]]; then
+		return
+	fi
+
+	"$@"
+}
+
+sudo -v
+
+log "Installing requirements..."
+curl -fsSL https://raw.githubusercontent.com/paultibbetts/dev/main/runs/bootstrap/homebrew | bash
+curl -fsSL https://raw.githubusercontent.com/paultibbetts/dev/main/runs/bootstrap/git | bash
+
+log "Preparing..."
+mkdir -p ~/code/
+
+if [[ -d "$HOME/code/dev" ]]; then
+    cd ~/code/dev
+    git pull
+else
+    git clone https://github.com/paultibetts/dev.git ~/code/dev
+fi
+
+cd ~/code/dev
+
+log "Bootstrapping..."
+execute ./run bootstrap
+
+log "Installing..."
+execute ./run
+
+log "Done!"
