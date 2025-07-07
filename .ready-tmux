@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 
-tmux new-window -d -n zsh -c "$PWD" "/bin/zsh"
+tmux new-window -d -n astro -c "$PWD" "cd docs && npm run dev"
 tmux new-window -d -n git -c "$PWD" "lazygit"
+tmux new-window -d -n zsh -c "$PWD" "/bin/zsh"
 
 tmux rename-window "nvim"
 nvim .

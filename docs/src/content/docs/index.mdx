@@ -1,0 +1,32 @@
+---
+title: paultibbetts/dev
+description: Get started building your docs site with Starlight.
+template: splash
+hero:
+  tagline: documentation for my developer environment setup
+  image:
+    file: ../../assets/houston.webp
+  actions:
+    - text: readme
+      link: /dev/readme
+      icon: right-arrow
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+## featuring
+
+<CardGrid stagger>
+	<Card title="bash" icon="pencil">
+		<pre><code>echo "yolo" && curl installer | bash</code></pre>
+	</Card>
+	<Card title="other languages" icon="add-document">
+		installs **Go**, **PHP** and 2 different flavours of **JavaScript**
+	</Card>
+	<Card title="system tools" icon="setting">
+		re-written in rust
+	</Card>
+	<Card title="documentation" icon="open-book">
+		to try and make sense of it [read it](/dev/readme)
+	</Card>
+</CardGrid>
