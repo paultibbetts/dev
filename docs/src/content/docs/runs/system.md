@@ -17,7 +17,7 @@ Most of the [new tools I'm using](/runs/tools/#cli) were made with Rust.
 
 via [the installer](https://go.dev/doc/install)
 
-Most of my new code is written in go.
+Most of my new code is written in Go.
 
 ### Node.js
 
@@ -27,13 +27,13 @@ Previously I've used [nvm](https://github.com/nvm-sh/nvm/blob/master/README.md) 
 
 Volta's made with Rust, so that was reason enough to try it out.
 
-### bun
+### Bun
 
 via [the installer](https://bun.sh/docs/installation)
 
 Bun's an exciting way to do TypeScript, so I keep it installed. 
 
-### php
+### PHP
 
 via [mise](https://mise.jdx.dev/)
 
@@ -43,7 +43,7 @@ It ended up causing the most amount of dependency installations and building PHP
 
 ## System tools
 
-Some system tools are also installed here. These are dependencies like the ones in the bootstrap directory but I wanted to make it clear they aren't required for the setup scripts to function.
+These are dependencies like the ones in the bootstrap directory but I wanted to make it clear they aren't required for the install script to function.
 
 ### Xcode Command Line tools
 

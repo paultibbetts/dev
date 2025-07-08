@@ -18,7 +18,7 @@ It targets **macOS** and is powered by **bash**.
 ## Install
 
 ```sh
-echo "yolo" && curl -fsSL https://raw.githubusercontent.com/paultibbetts/dev/main/install | bash
+curl -fsSL https://raw.githubusercontent.com/paultibbetts/dev/main/install | bash
 ```
 This script will prep the system for installation and then run all the other scripts.
 
@@ -26,7 +26,7 @@ It's interactive and you will need to enter your sudo password a few times.
 
 ## Usage
 
-My dev environment changes alot so I have scripts that I use when I make a change, which is faster than running everything all over again.
+My dev environment changes a lot so I have scripts that I use when I make a change, which is faster than running everything all over again.
 
 ### `./env`
 

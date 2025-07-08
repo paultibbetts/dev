@@ -1,15 +1,18 @@
 ---
 title: paultibbetts/dev
-description: Get started building your docs site with Starlight.
+description: Documentation for my developer environmnet
 template: splash
 hero:
-  tagline: documentation for my developer environment setup
+  tagline: documentation for my developer environment
   image:
     file: ../../assets/houston.webp
   actions:
     - text: readme
       link: /dev/readme
-      icon: right-arrow
+      icon: information
+    - text: code
+      link: https://github.com/paultibbetts/dev
+      icon: github
     - text: why does this exist?
       link: https://paultibbetts.uk/2025/07/07/developer-environment-setup/
       icon: external
@@ -22,15 +25,15 @@ import { Card, CardGrid } from '@astrojs/starlight/components';
 
 <CardGrid stagger>
 	<Card title="bash" icon="pencil">
-		<pre><code>echo "yolo" && curl installer | bash</code></pre>
+		<pre><code>echo "yolo" && curl | bash</code></pre>
 	</Card>
 	<Card title="other languages" icon="add-document">
-		installs **Go**, **PHP** and 2 different flavours of **JavaScript**
+		**Go**, **PHP** and 2 different flavours of **JavaScript**
 	</Card>
 	<Card title="system tools" icon="setting">
-		re-written in rust
+		re-written in Rust
 	</Card>
 	<Card title="documentation" icon="open-book">
-		to try and make sense of it [read it](/dev/readme)
+		to try and make sense of it
 	</Card>
 </CardGrid>

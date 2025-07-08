@@ -10,7 +10,7 @@ export default defineConfig({
 	base: "/dev",
 	integrations: [
 		starlight({
-			title: "dev",
+			title: "paultibbetts/dev",
 			social: [{
 				icon: "github",
 				label: "GitHub",
