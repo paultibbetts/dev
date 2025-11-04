@@ -24,9 +24,10 @@ sudo make install
 
 sudo mv ./build/bin/nvim /usr/local/bin/nvim
 
-# symlink lazy-lock.json to dev directory
+# ensure lazy-lock.json in ~/.config uses dev version
 
-ln -s "$HOME/.config/nvim/lazy-lock.json" "$HOME/code/dev/config/nvim/lazy-lock.json"
+mkdir -p "$HOME/.config/nvim"
+ln -sf "$HOME/code/dev/config/nvim/lazy-lock.json" "$HOME/.config/nvim/lazy-lock.json"
 
 # install plugins from lockfile
 
