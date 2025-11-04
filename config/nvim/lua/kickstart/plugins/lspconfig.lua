@@ -240,6 +240,30 @@ return {
               },
             },
           },
+
+          -- Python
+          basedpyright = {
+            settings = {
+              basedpyright = {
+                disableOrganizeImports = true, -- Ruff will sort/remove
+                analysis = {
+                  typeCheckingMode = 'basic', -- or "strict"
+                  diagnosticSeverityOverrides = {
+                    reportUnusedImport = 'none',
+                    reportUnusedVariable = 'none', -- handled by Ruff F841
+                    reportDuplicateImport = 'none',
+                  },
+                },
+              },
+            },
+          },
+          ruff = {
+            init_options = {
+              settings = {
+                args = {}, -- { "--line-length", "100" }
+              },
+            },
+          },
         },
         -- This table contains config for all language servers that are *not* installed via Mason.
         -- Structure is identical to the mason table from above.

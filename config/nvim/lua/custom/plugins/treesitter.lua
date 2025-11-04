@@ -15,6 +15,7 @@ return {
       'json',
       'make',
       'php',
+      'python',
       'sql',
       'terraform',
       'yaml',
