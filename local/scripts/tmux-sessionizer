@@ -1,26 +1,90 @@
 #!/usr/bin/env bash
+set -euo pipefail
 
-selected=$(fd . --base-directory "$HOME/code" --exact-depth 1 --type d --strip-cwd-prefix | fzf --tmux)
+# config
 
-if [[ -z $selected ]]; then
-	exit 0
-fi
+PROJECTS_DIR="${HOME}/code"
 
-selected_name=$(basename $selected | tr ":,. " "____")
+# helpers
 
 switch_to() {
-	if [[ -z "$TMUX" ]]; then
-		tmux attach-session -t $selected_name
+	local session_name="$1"
+
+	if [[ -z "${TMUX:-}" ]]; then
+		tmux attach-session -t "$session_name"
 	else
-		tmux switch-client -t $selected_name
+		tmux switch-client -t "$session_name"
 	fi
 }
 
-if tmux has-session -t=$selected_name 2> /dev/null; then
-	switch_to
+safe_session_name() {
+	# turn "my repo:name" into "my___repo_name"
+	printf '%s' "$1" | tr ':,. ' '____'
+}
+
+resolve_dir() {
+	local raw="$1"
+	local dir=""
+
+	if [[ "$raw" = /* ]]; then
+		dir="$raw"
+	else
+		dir="{PROJECTS_DIR}]/$raw"
+	fi
+	printf '%s' "$dir"
+}
+
+open_session_for_dir() {
+	local dir="$1"
+	local base
+	base="$(basename "$dir")"
+	local session
+	session="$(safe_session_name "$base")"
+
+	if tmux has-session -t="$session" 2> /dev/null; then
+		switch_to "$session"
+		return
+	fi
+
+	tmux new-session -ds "$session" -c "$dir"
+	tmux send-keys -t "$session:1.0" "ready-tmux" C-m
+	switch_to "$session"
+}
+
+# arg provided
+# accepts:
+#   tmux-sessionizer repo-name
+#   tmux-sessionizer org/repo-name
+#   tmux-sessionizer /absolute/path/to-repo
+if [[ -n "${1:-}" ]]; then
+	target_raw="$1"
+	target_dir="$(resolve_dir "$target_raw")"
+
+	if [[ ! -d "$target_dir" ]]; then
+		fallback="${PROJECTS_DIR}/$(basename "$target_dir")"
+		if [[ -d "$fallback" ]]; then
+			target_dir="$fallback"
+		else
+			echo "tmux-sessionizer: directory not found: $target_dir" >&2
+			exit 1
+		fi
+	fi
+
+	open_session_for_dir "$target_dir"
 	exit 0
 fi
 
-tmux new-session -ds $selected_name -c "$HOME/code/$selected"
-tmux send-keys -t "$selected_name:1.0" "ready-tmux" C-m 
-switch_to
+selected="$(
+	fd . \
+		--base-directory "$PROJECTS_DIR" \
+		--exact-depth 1 \
+		--type d \
+		--strip-cwd-prefix \
+	| fzf --tmux
+)"
+
+if [[ -z "$selected" ]]; then
+	exit 0
+fi
+
+open_session_for_dir "${PROJECTS_DIR}/${selected}"
