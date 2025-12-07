@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
+NEOVIM_VERSION=v0.11.1
+
+echo "Installing neovim $NEOVIM_VERSION"
 
 # pre-requisites
 
@@ -7,22 +10,25 @@ brew install ninja cmake gettext curl
 # clone
 
 mkdir -p $HOME/git
+NEOVIM_GIT_DIR="$HOME/git/neovim"
 
-git clone -b v0.11.1 https://github.com/neovim/neovim $HOME/git/neovim
+if [ -d "$NEOVIM_GIT_DIR/.git" ]; then
+	echo "Repo exists, updating..."
+	git -C "$NEOVIM_GIT_DIR" fetch --all --tags --prune
+else
+	echo "Cloning neovim..."
+	git clone https://github.com/neovim/neovim "$NEOVIM_GIT_DIR"
+fi
 
 # build
 
 cd $HOME/git/neovim
 
-git checkout stable
+git checkout "$NEOVIM_VERSION"
 
+make distclean || true
 make CMAKE_BUILD_TYPE=RelWithDebInfo
-
 sudo make install
-
-# path
-
-sudo mv ./build/bin/nvim /usr/local/bin/nvim
 
 # ensure lazy-lock.json in ~/.config uses dev version
 
