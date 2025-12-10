@@ -1,23 +1,10 @@
-[user]
-  name = Paul Tibbetts
-  email = code@paultibbetts.uk
-
 [core]
   editor = vi
   pager = delta
 
-[init]
-  defaultBranch = main
-
-[interactive]
-  diffFilter = delta --color-only
-
 [delta]
   features = decorations
   navigate = true
-
-[delta "interactive"]
-  keep-plus-minus-markers = false
 
 [delta "decorations"]
   commit-decoration-style = blue ol
@@ -28,5 +15,18 @@
   hunk-header-line-number-style = "#067a00"
   hunk-header-style = file line-number syntax
 
+[delta "interactive"]
+  keep-plus-minus-markers = false
+
+[init]
+  defaultBranch = main
+
+[interactive]
+  diffFilter = delta --color-only
+
 [merge]
   conflictStyle = zdiff3
+
+[user]
+  name = Paul Tibbetts
+  email = code@paultibbetts.uk
