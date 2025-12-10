@@ -3,6 +3,7 @@
   email = code@paultibbetts.uk
 
 [core]
+  editor = vi
   pager = delta
 
 [init]
