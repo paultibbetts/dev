@@ -1,19 +1,19 @@
 [user]
-	name = Paul Tibbetts
-	email = code@paultibbetts.uk
+  name = Paul Tibbetts
+  email = code@paultibbetts.uk
 
 [core]
-	pager = delta
+  pager = delta
 
 [init]
   defaultBranch = main
 
 [interactive]
-	diffFilter = delta --color-only
+  diffFilter = delta --color-only
 
 [delta]
   features = decorations
-	navigate = true
+  navigate = true
 
 [delta "interactive"]
   keep-plus-minus-markers = false
@@ -28,4 +28,4 @@
   hunk-header-style = file line-number syntax
 
 [merge]
-	conflictStyle = zdiff3
+  conflictStyle = zdiff3
