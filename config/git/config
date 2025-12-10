@@ -27,6 +27,9 @@
 [merge]
   conflictStyle = zdiff3
 
+[pull]
+  ff = only
+
 [user]
   name = Paul Tibbetts
   email = code@paultibbetts.uk
