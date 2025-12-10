@@ -18,6 +18,9 @@
 [delta "interactive"]
   keep-plus-minus-markers = false
 
+[fetch]
+  prune = true
+
 [init]
   defaultBranch = main
 
