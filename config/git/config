@@ -33,6 +33,9 @@
 [pull]
   ff = only
 
+[push]
+  autoSetupRemote = true
+
 [user]
   name = Paul Tibbetts
   email = code@paultibbetts.uk
