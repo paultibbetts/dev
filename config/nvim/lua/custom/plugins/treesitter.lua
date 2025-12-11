@@ -10,6 +10,7 @@ return {
       'editorconfig',
       'gitignore',
       'go',
+      'gotmpl',
       'helm',
       'html',
       'json',
