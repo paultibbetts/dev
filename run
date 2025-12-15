@@ -40,9 +40,9 @@ cd $script_dir
 dirs=()
 
 if [[ $bootstrap == "1" || $filter == "bootstrap" ]]; then
-	dirs=("./runs/bootstrap")
+	dirs=("./runs/00-bootstrap")
 else
-	dirs=("./runs/system" "./runs/runtimes" "./runs/tools")
+	dirs=("./runs/10-system" "./runs/20-runtimes" "./runs/30-tools")
 fi
 
 for dir in "${dirs[@]}"; do

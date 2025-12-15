@@ -12,7 +12,7 @@ execute() {
 }
 
 log "Bootstrapping..."
-curl -fsSL https://raw.githubusercontent.com/paultibbetts/dev/main/runs/bootstrap/00-xcode-cl-tools | bash
+curl -fsSL https://raw.githubusercontent.com/paultibbetts/dev/main/runs/00-bootstrap/00-xcode-cl-tools | bash
 
 log "Preparing..."
 mkdir -p ~/code/
