@@ -37,21 +37,21 @@ log "$script_dir -- $filter"
 
 cd $script_dir
 
+dirs=()
+
 if [[ $bootstrap == "1" || $filter == "bootstrap" ]]; then
-	execute ./runs/bootstrap/run ${dry:+--dry}
+	dirs=("./runs/bootstrap")
+else
+	dirs=("./runs/system" "./runs/runtimes" "./runs/tools")
 fi
 
-if [[ $filter == "bootstrap" ]]; then
-	exit 0;
-fi
+for dir in "${dirs[@]}"; do
+	scripts=$(find "$dir" -mindepth 1 -maxdepth 1 -type f -perm -111 | sort)
+	for script in $scripts; do
+		if [[ -n "$filter" && "$script" != *"$filter"* ]]; then
+			continue
+		fi
 
-scripts=$(find ./runs/system ./runs/tools -mindepth 1 -maxdepth 1 -type f -perm +111)
-
-for script in $scripts; do
-	if echo "$script" | grep -qv "$filter"; then
-		log "filtering $script"
-		continue
-	fi
-
-	execute ./$script
+		execute ./$script
+	done
 done

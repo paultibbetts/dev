@@ -1,40 +1,18 @@
 #!/usr/bin/env bash
 
-set -e
-
-script_dir=$(cd $(dirname "${BASH_SOURCE[0]}") && pwd)
-
-while [[ $# > 0 ]]; do
-	if [[ $1 == "--dry" ]]; then
-		dry="1"
-	else
-		filter="$1"
-	fi
-	shift
-done
+set -euo pipefail
 
 log() {
-	if [[ $dry == "1" ]]; then
-		echo "[DRY_RUN]: $@"
-	else
-		echo "$@"
-	fi
+	echo "$@"
 }
 
 execute() {
 	log "execute $@"
-	if [[ $dry == "1" ]]; then
-		return
-	fi
-
 	"$@"
 }
 
-sudo -v
-
-log "Installing requirements..."
-curl -fsSL https://raw.githubusercontent.com/paultibbetts/dev/main/runs/bootstrap/homebrew | bash
-curl -fsSL https://raw.githubusercontent.com/paultibbetts/dev/main/runs/bootstrap/git | bash
+log "Bootstrapping..."
+curl -fsSL https://raw.githubusercontent.com/paultibbetts/dev/main/runs/bootstrap/00-xcode-cl-tools | bash
 
 log "Preparing..."
 mkdir -p ~/code/
@@ -47,9 +25,6 @@ else
 fi
 
 cd ~/code/dev
-
-log "Bootstrapping..."
-execute ./run bootstrap
 
 log "Installing..."
 execute ./run
