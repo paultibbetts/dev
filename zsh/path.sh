@@ -1,9 +1,10 @@
-addToPath() {
+addToPathFront() {
   case ":$PATH:" in
     *:"$1":*) ;; # already in PATH
-    *) PATH="$PATH:$1" ;; # append to PATH
+    *) PATH="$1:$PATH" ;; # prepend to PATH
   esac
 }
 
-addToPath ~/.local/scripts
+addToPathFront ~/.local/bin
+addToPathFront ~/.local/scripts
 

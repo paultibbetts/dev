@@ -9,7 +9,7 @@ brew install ninja cmake gettext curl
 
 # clone
 
-mkdir -p $HOME/git
+mkdir -p "$HOME/git"
 NEOVIM_GIT_DIR="$HOME/git/neovim"
 
 if [ -d "$NEOVIM_GIT_DIR/.git" ]; then
@@ -22,13 +22,15 @@ fi
 
 # build
 
-cd $HOME/git/neovim
+cd "$HOME/git/neovim"
 
 git checkout "$NEOVIM_VERSION"
 
+PREFIX="$HOME/.local"
+
 make distclean || true
-make CMAKE_BUILD_TYPE=RelWithDebInfo
-sudo make install
+make CMAKE_BUILD_TYPE=RelWithDebInfo CMAKE_INSTALL_PREFIX="$PREFIX"
+make install
 
 # ensure lazy-lock.json in ~/.config uses dev version
 
@@ -37,4 +39,4 @@ ln -sf "$HOME/code/dev/config/nvim/lazy-lock.json" "$HOME/.config/nvim/lazy-lock
 
 # install plugins from lockfile
 
-nvim --headless "+Lazy! sync" +qa
+"$PREFIX/bin/nvim" --headless "+Lazy! sync" +qa
