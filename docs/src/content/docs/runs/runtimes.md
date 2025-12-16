@@ -15,6 +15,14 @@ via [the official installer](https://go.dev/doc/install)
 
 Most of my current code is written in Go.
 
+## Python
+
+via [uv](https://docs.astral.sh/uv/)
+
+Python is for scripts, experiments, and access to its huge ecosystem of libraries for data-related tasks.
+
+uv is the fast, modern way to manage it, without the friction of traditional tooling.
+
 ## Rust
 
 via [rustup](https://rustup.rs/)
