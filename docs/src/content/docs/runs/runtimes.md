@@ -27,7 +27,7 @@ uv is the fast, modern way to manage it, without the friction of traditional too
 
 via [rustup](https://rustup.rs/)
 
-Lots of the [new tools I'm using](/runs/tools/#cli) were made with Rust, and having the toolchain installed makes it easier to try out new ones distributed via Cargo.
+Lots of the new tools I'm using were made with Rust, and having the toolchain installed makes it easier to try out new ones distributed via Cargo.
 
 ## Node.js
 
