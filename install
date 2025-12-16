@@ -29,4 +29,4 @@ cd ~/code/dev
 log "Installing..."
 execute ./run
 
-log "Done!"
+log "Tooling installed. Review ~/code/dev/config, then run ./env to apply it."

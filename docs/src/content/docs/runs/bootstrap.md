@@ -3,14 +3,10 @@ title: Bootstrap
 description: The bootstrap layer
 ---
 
-Gets the system ready to install tools.
+Prepares the system so the remaining scripts can be executed.
 
-## Homebrew
+## Xcode Command Line tools
 
-[Homebrew](https://brew.sh) is a package manager for macOS so it's installed first. 
+The [Xcode CL tools](https://developer.apple.com/documentation/xcode/installing-the-command-line-tools) provide the compiler and SDK environment, which everything else in this setup builds upon.
 
-## Git
-
-[Git](https://git-scm.com) is installed by Homebrew.
-
-The install script uses Git to download the rest of the code onto the machine it's installing to.
+They also include Apple's distribution of Git, which is sufficient for the install script to clone the project locally and run the rest of the scripts.

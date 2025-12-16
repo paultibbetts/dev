@@ -50,6 +50,10 @@ export default defineConfig({
 							slug: "runs/system",
 						},
 						{
+							label: "Runtimes",
+							slug: "runs/runtimes",
+						},
+						{
 							label: "Tools",
 							slug: "runs/tools",
 						},
