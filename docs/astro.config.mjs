@@ -6,11 +6,11 @@ const isProd = import.meta.env.PROD;
 
 // https://astro.build/config
 export default defineConfig({
-	site: isProd ? "https://paultibbetts.github.io" : undefined,
-	base: "/dev",
+	site: isProd ? "https://dev.paultibbetts.uk" : undefined,
+	base: "/",
 	integrations: [
 		starlight({
-			title: "paultibbetts/dev",
+			title: "dev.paultibbetts.uk",
 			social: [{
 				icon: "github",
 				label: "GitHub",
