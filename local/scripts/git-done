@@ -1,8 +1,34 @@
 #!/usr/bin/env bash
+set -euo pipefail
 
-set -e
+remote="${GIT_DONE_REMOTE:-origin}"
+default_branch="main"
 
-prev=$(git symbolic-ref --short HEAD)
-git checkout main
-git pull
+git rev-parse --git-dir >/dev/null 2>&1
+
+prev="$(git branch --show-current)"
+if [[ -z "$prev" ]]; then
+  echo "git-done: detached HEAD; refusing to continue." >&2
+  exit 1
+fi
+
+if [[ "$prev" == "$default_branch" ]]; then
+  echo "git-done: already on ${default_branch}; nothing to delete." >&2
+  exit 0
+fi
+
+git fetch "$remote" --prune
+git switch "$default_branch"
+git pull --ff-only "$remote" "$default_branch"
+
+# Delete local branch (safe: refuses if not merged)
 git branch -d "$prev"
+
+# Delete remote branch *if it exists* and *if it was merged into the remote default branch*
+if git show-ref --verify --quiet "refs/remotes/${remote}/${prev}"; then
+  if git merge-base --is-ancestor "${remote}/${prev}" "${remote}/${default_branch}"; then
+    git push "$remote" --delete "$prev"
+  else
+    echo "git-done: remote branch ${remote}/${prev} not merged into ${remote}/${default_branch}; not deleting remote." >&2
+  fi
+fi
