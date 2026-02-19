@@ -19,21 +19,23 @@ hero:
       variant: minimal
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
+import { Card, CardGrid } from "@astrojs/starlight/components";
 
 ## featuring
 
 <CardGrid stagger>
-	<Card title="bash" icon="pencil">
-		<pre><code>echo "yolo" && curl | bash</code></pre>
-	</Card>
-	<Card title="other languages" icon="add-document">
-		**Go**, **Python**, **PHP** and 2 different flavours of **TypeScript**
-	</Card>
-	<Card title="system tools" icon="setting">
-		re-written in Rust
-	</Card>
-	<Card title="documentation" icon="open-book">
-		to try and make sense of it
-	</Card>
+  <Card title="bash" icon="pencil">
+    <pre>
+      <code>echo "yolo" && curl | bash</code>
+    </pre>
+  </Card>
+  <Card title="other languages" icon="add-document">
+    **Go**, **Python**, **PHP** and 2 different flavours of **TypeScript**
+  </Card>
+  <Card title="system tools" icon="setting">
+    re-written in Rust
+  </Card>
+  <Card title="documentation" icon="open-book">
+    to try and make sense of it
+  </Card>
 </CardGrid>

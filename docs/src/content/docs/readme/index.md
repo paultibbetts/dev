@@ -102,9 +102,9 @@ Filtering is substring-based and applies to the script names.
 
 ```sh
 ./run bootstrap  # only bootstrap scripts
-./run system     # only system-level scripts 
+./run system     # only system-level scripts
 ./run runtimes   # only language runtime scripts
-./run tools      # only user tooling scripts 
+./run tools      # only user tooling scripts
 ./run neovim     # any script with 'neovim' in the name
 ```
 
