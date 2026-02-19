@@ -11,6 +11,15 @@ export default defineConfig({
   integrations: [
     starlight({
       title: "dev.paultibbetts.uk",
+      head: [
+        {
+          tag: 'link',
+          attrs: {
+            rel: 'webmention',
+            href: 'https://webmention.io/paultibbetts.uk/webmention',
+          }
+        }
+      ],
       social: [
         {
           icon: "github",
