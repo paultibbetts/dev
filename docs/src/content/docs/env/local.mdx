@@ -3,8 +3,10 @@ title: local
 description: ~/.local
 ---
 
+import DirectoryTree from "../../../components/DirectoryTree.astro";
+
 The `local` directory is copied over to `~/.local`.
 
 `~/.local/scripts` is added to the `PATH` so executables in that directory are available globally.
 
-You can [view the scripts on GitHub](https://github.com/paultibbetts/dev/tree/main/local).
+<DirectoryTree path="local" title="/local" maxDepth={1} />
