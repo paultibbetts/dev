@@ -1,0 +1,33 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:best-practices"],
+  "timezone": "Europe/London",
+  "enabledManagers": ["npm", "github-actions", "mise"],
+  "labels": ["dependencies"],
+  "prConcurrentLimit": 5,
+  "prHourlyLimit": 2,
+  "packageRules": [
+    {
+      "description": "Require explicit approval before opening major upgrade PRs.",
+      "matchUpdateTypes": ["major"],
+      "dependencyDashboardApproval": true
+    },
+    {
+      "description": "Keep GitHub Actions updates together.",
+      "matchManagers": ["github-actions"],
+      "groupName": "github actions"
+    },
+    {
+      "description": "Keep non-breaking docs dependency updates together.",
+      "matchManagers": ["npm"],
+      "matchFileNames": ["docs/package.json"],
+      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+      "groupName": "docs dependencies"
+    },
+    {
+      "description": "Keep runtime bumps separate from app dependencies.",
+      "matchManagers": ["mise"],
+      "groupName": "mise runtimes"
+    }
+  ]
+}
