@@ -1,7 +1,6 @@
 ---
-import { readdir } from "node:fs/promises";
-import { dirname, resolve, sep } from "node:path";
-import { fileURLToPath } from "node:url";
+import { access, readdir } from "node:fs/promises";
+import { dirname, resolve } from "node:path";
 import { Code } from "@astrojs/starlight/components";
 
 interface Props {
@@ -12,16 +11,14 @@ interface Props {
 
 const { path, title, maxDepth = Number.POSITIVE_INFINITY } = Astro.props;
 
-const componentDir = dirname(fileURLToPath(import.meta.url));
-const repoRoot = resolve(componentDir, "../../..");
-const targetDir = resolve(repoRoot, path);
-
 if (!path) {
   throw new Error("DirectoryTree: `path` is required.");
 }
 
-if (!(targetDir === repoRoot || targetDir.startsWith(`${repoRoot}${sep}`))) {
-  throw new Error(`DirectoryTree: path "${path}" resolves outside repo root.`);
+const normalizedPath = path.replace(/^\.?\//, "").replace(/\/+$/, "");
+
+if (!normalizedPath || normalizedPath.split("/").includes("..")) {
+  throw new Error(`DirectoryTree: path "${path}" must be a repo-relative directory.`);
 }
 
 const isIgnored = (name: string) => name === ".DS_Store";
@@ -56,7 +53,30 @@ const buildTree = async (dir: string, depth = 1, prefix = ""): Promise<string[]>
   return lines;
 };
 
-const normalizedPath = path.replace(/^\.?\//, "").replace(/\/+$/, "");
+const resolveTargetDir = async (relativePath: string): Promise<string> => {
+  let currentDir = resolve(process.cwd());
+
+  while (true) {
+    const candidateDir = resolve(currentDir, relativePath);
+
+    try {
+      await access(candidateDir);
+      return candidateDir;
+    } catch {
+      const parentDir = dirname(currentDir);
+
+      if (parentDir === currentDir) {
+        throw new Error(
+          `DirectoryTree: path "${relativePath}" was not found from "${process.cwd()}" or any parent directory.`,
+        );
+      }
+
+      currentDir = parentDir;
+    }
+  }
+};
+
+const targetDir = await resolveTargetDir(normalizedPath);
 const rootLabel = title ?? `/${normalizedPath}`;
 const treeLines = await buildTree(targetDir);
 const code = [`${rootLabel}/`, ...treeLines].join("\n");
