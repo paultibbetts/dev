@@ -10,11 +10,11 @@ return {
         require_cwd = true, -- config working directory
       })
 
-      opts.formatters_by_ft = {
+      opts.formatters_by_ft = vim.tbl_deep_extend('force', opts.formatters_by_ft, {
         html = { 'prettier' },
         javascript = { 'prettier' },
         typescript = { 'prettier' },
-      }
+      })
     end,
   },
 }
