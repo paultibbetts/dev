@@ -21,6 +21,7 @@ return {
       'terraform',
       'yaml',
       'toml',
+      'twig',
       'typescript',
     })
   end,

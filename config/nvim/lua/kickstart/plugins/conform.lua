@@ -31,6 +31,8 @@ return {
       end,
       formatters_by_ft = {
         lua = { 'stylua' },
+        php = { 'php_cs_fixer' },
+        twig = { 'twig-cs-fixer' },
         -- Conform can also run multiple formatters sequentially
         python = {
           -- To fix auto-fixable lint errors.
