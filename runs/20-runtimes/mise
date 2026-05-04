@@ -1,31 +1,53 @@
 #!/usr/bin/env bash
 
+set -euo pipefail
+
+ZSHRC="${ZDOTDIR:-$HOME}/.zshrc"
+ACTIVATE_LINE='eval "$(mise activate zsh)"'
+BISON_BIN="$(brew --prefix bison)/bin"
+OPENSSL_PREFIX="$(brew --prefix openssl@3)"
+
 brew install \
   autoconf \
   automake \
   bison \
+  bzip2 \
+  curl \
   freetype \
   gd \
   gettext \
+  gmp \
   icu4c \
   krb5 \
   libedit \
   libiconv \
   libjpeg \
   libpng \
+  libpq \
   libxml2 \
+  libxslt \
   libzip \
+  libsodium \
+  mise \
+  oniguruma \
+  openssl@3 \
   pkg-config \
+  readline \
   re2c \
+  sqlite \
+  webp \
   zlib
 
-curl https://mise.run | sh
+if ! grep -Fqx "$ACTIVATE_LINE" "$ZSHRC" 2>/dev/null; then
+  printf '\n%s\n' "$ACTIVATE_LINE" >>"$ZSHRC"
+fi
 
-export MISE_DIR="$HOME/.mise"
-export PATH="$MISE_DIR/bin:$MISE_DIR/shims:$PATH"
-eval "$("$MISE_DIR/bin/mise" activate bash)"
+export PATH="${BISON_BIN}:$PATH"
+export PHP_EXTRA_CONFIGURE_OPTIONS="--with-openssl=${OPENSSL_PREFIX}"
 
-mise plugin add php
+eval "$(mise activate bash)"
 
-export PHP_CONFIGURE_OPTIONS="--with-openssl=$(brew --prefix openssl@3) --with-iconv=$(brew --prefix libiconv)"
+# Prefer modern plugins over legacy asdf plugins when config uses shorthand names.
+mise settings add disable_backends asdf
+
 mise install
