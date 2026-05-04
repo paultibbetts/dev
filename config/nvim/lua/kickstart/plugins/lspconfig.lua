@@ -119,7 +119,8 @@ return {
           map('grt', require('telescope.builtin').lsp_type_definitions, '[G]oto [T]ype Definition')
 
           -- Toggle to show/hide diagnostic messages
-          map('<leader>td', function() vim.diagnostic.enable(not vim.diagnostic.is_enabled()) end, '[T]oggle [D]iagnostics')
+          map('<leader>td', function() vim.diagnostic.enable(not vim.diagnostic.is_enabled()) end,
+            '[T]oggle [D]iagnostics')
 
           -- The following two autocommands are used to highlight references of the
           -- word under your cursor when your cursor rests there for a little while.
@@ -155,7 +156,9 @@ return {
           --
           -- This may be unwanted, since they displace some of your code
           if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint, event.buf) then
-            map('<leader>th', function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf }) end, '[T]oggle Inlay [H]ints')
+            map('<leader>th',
+              function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf }) end,
+              '[T]oggle Inlay [H]ints')
           end
         end,
       })
@@ -260,7 +263,7 @@ return {
               basedpyright = {
                 disableOrganizeImports = true, -- Ruff will sort/remove
                 analysis = {
-                  typeCheckingMode = 'basic', -- or "strict"
+                  typeCheckingMode = 'basic',  -- or "strict"
                   diagnosticSeverityOverrides = {
                     reportUnusedImport = 'none',
                     reportUnusedVariable = 'none', -- handled by Ruff F841
@@ -315,7 +318,7 @@ return {
 
       -- After configuring our language servers, we now enable them
       require('mason-lspconfig').setup {
-        ensure_installed = {}, -- explicitly set to an empty table (Kickstart populates installs via mason-tool-installer)
+        ensure_installed = {},   -- explicitly set to an empty table (Kickstart populates installs via mason-tool-installer)
         automatic_enable = true, -- automatically run vim.lsp.enable() for all servers that are installed via Mason
       }
 
