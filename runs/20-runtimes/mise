@@ -2,52 +2,11 @@
 
 set -euo pipefail
 
-ZSHRC="${ZDOTDIR:-$HOME}/.zshrc"
-ACTIVATE_LINE='eval "$(mise activate zsh)"'
-BISON_BIN="$(brew --prefix bison)/bin"
-OPENSSL_PREFIX="$(brew --prefix openssl@3)"
-
-brew install \
-  autoconf \
-  automake \
-  bison \
-  bzip2 \
-  curl \
-  freetype \
-  gd \
-  gettext \
-  gmp \
-  icu4c \
-  krb5 \
-  libedit \
-  libiconv \
-  libjpeg \
-  libpng \
-  libpq \
-  libxml2 \
-  libxslt \
-  libzip \
-  libsodium \
-  mise \
-  oniguruma \
-  openssl@3 \
-  pkg-config \
-  readline \
-  re2c \
-  sqlite \
-  webp \
-  zlib
-
-if ! grep -Fqx "$ACTIVATE_LINE" "$ZSHRC" 2>/dev/null; then
-  printf '\n%s\n' "$ACTIVATE_LINE" >>"$ZSHRC"
-fi
-
-export PATH="${BISON_BIN}:$PATH"
-export PHP_EXTRA_CONFIGURE_OPTIONS="--with-openssl=${OPENSSL_PREFIX}"
+brew install mise \
+    libtool # used by xdebug
 
 eval "$(mise activate bash)"
 
-# Prefer modern plugins over legacy asdf plugins when config uses shorthand names.
-mise settings add disable_backends asdf
+mise plugin install php https://github.com/verzly/mise-php
 
 mise install

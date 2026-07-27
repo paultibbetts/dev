@@ -1,2 +1,5 @@
 [tools]
-"vfox:mise-plugins/vfox-php" = "8.5.5"
+"php" = "8.5.5"
+
+[env]
+_.php = { pie_extensions = "xdebug/xdebug" }
