@@ -1,5 +1,5 @@
 [tools]
-"php" = "8.5.9"
+"php" = "8.5.10"
 
 [env]
 _.php = { pie_extensions = "xdebug/xdebug" }
