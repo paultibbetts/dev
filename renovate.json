@@ -2,10 +2,20 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": ["config:best-practices"],
   "timezone": "Europe/London",
-  "enabledManagers": ["npm", "github-actions", "mise"],
+  "enabledManagers": ["npm", "github-actions", "mise", "custom.regex"],
   "labels": ["dependencies"],
   "prConcurrentLimit": 5,
   "prHourlyLimit": 2,
+  "customManagers": [
+    {
+      "customType": "regex",
+      "managerFilePatterns": ["/^runs\\/20-runtimes\\/go$/"],
+      "matchStrings": ["GO_VERSION=\\\"(?<currentValue>[^\\\"]+)\\\""],
+      "depNameTemplate": "go",
+      "datasourceTemplate": "golang-version",
+      "versioningTemplate": "semver"
+    }
+  ],
   "packageRules": [
     {
       "description": "Require explicit approval before opening major upgrade PRs.",
