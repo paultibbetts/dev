@@ -74,13 +74,18 @@ if [[ -n "${1:-}" ]]; then
 	exit 0
 fi
 
+fzf_args=(--tmux)
+if [[ "${TMUX_SESSIONIZER_POPUP:-}" == "1" ]]; then
+	fzf_args=(--no-tmux)
+fi
+
 selected="$(
 	fd . \
 		--base-directory "$PROJECTS_DIR" \
 		--exact-depth 1 \
 		--type d \
 		--strip-cwd-prefix \
-	| fzf --tmux
+	| fzf "${fzf_args[@]}"
 )"
 
 if [[ -z "$selected" ]]; then
