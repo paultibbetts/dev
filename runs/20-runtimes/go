@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-GO_VERSION="1.27.3"
+GO_VERSION="1.27.4"
 ARCH="arm64"
 OS="darwin"
 
